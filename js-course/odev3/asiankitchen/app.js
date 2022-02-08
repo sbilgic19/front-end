@@ -81,3 +81,62 @@ const menu = [
     desc: `Red bean paste dessert, serving with honey.`,
   },
 ];
+let dom = document.querySelector(".section-center")
+function initialMenu(menus){
+  for(let item in menus){
+    let elem = document.createElement("div")
+    elem.classList.add("menu-items", "col-lg-6", "col-sm-12")
+    elem.innerHTML = `
+    <img src=${menus[item]["img"]}
+    alt=${menus[item]["title"].split(" ")[0]} class="photo">
+    <div class="menu-info">
+      <div class="menu-title">
+        <h4>${menus[item]["title"]}</h4>
+        <h4 class="price">${menus[item]["price"]}</h4>
+      </div>
+
+      <div class="menu-text">${menus[item]["desc"]}</div>
+
+    </div>
+    `
+    dom.append(elem);
+  }
+}
+
+function createButtons(name){
+  return `<button class="btn btn-outline-dark btn-item" id="${name}">${name}</button>`;
+}
+
+const buttonDOM = document.querySelector(".btn-container")
+const kitchen = ["Korea", "Japan", "China"];
+
+function initializeButtons() {
+  buttonDOM.innerHTML += createButtons("All")
+  kitchen.forEach(item => {
+    buttonDOM.innerHTML += createButtons(item)
+  });
+
+  document.querySelectorAll(".btn").forEach(button =>{
+    button.addEventListener("click", sortItems)
+  })
+}
+
+function sortItems(event){
+  const kitchenName = event.target.id
+  dom.innerHTML = ""
+  if(kitchenName == "All"){
+    initialMenu(menu)
+  }else{
+    const org = menu.filter(food => food.category == kitchenName)
+    initialMenu(org)
+  }
+}
+
+initialMenu(menu)
+initializeButtons()
+
+
+
+
+
+
