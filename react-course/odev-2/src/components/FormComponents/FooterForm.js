@@ -4,11 +4,7 @@ import {useState, useEffect} from "react";
 function FooterForm({todolist, setTodos, setCurrentList, currentList}) {
 
     
-    // useEffect(()=>{
 
-    //     setCurrentList(todolist)
-    
-    //   },[todolist])
     const filterFuncComp = (e) => {
         e.preventDefault();
         let complets = currentList.filter(comp => {
@@ -22,7 +18,15 @@ function FooterForm({todolist, setTodos, setCurrentList, currentList}) {
         })
         setTodos(actives);
     }
-    
+    const deleteAll = (e) => {
+        let actives = currentList.filter(act => {
+            return act.isDone === false;
+        })
+        currentList = actives
+        
+        setTodos([...currentList]);
+    }
+
     
    
     return (
@@ -45,7 +49,7 @@ function FooterForm({todolist, setTodos, setCurrentList, currentList}) {
                 </li>
 		    </ul>
 
-            <button className="clear-completed">
+            <button onClick={deleteAll} className="clear-completed">
 			Clear completed
 		    </button>
         </footer>

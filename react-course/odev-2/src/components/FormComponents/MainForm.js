@@ -17,7 +17,6 @@ function MainForm({setTodos, todolist, setCurrentList, currentList}) {
             setForm(defaultInput)
         }
        
-       
     }
 
 
@@ -80,12 +79,6 @@ function MainForm({setTodos, todolist, setCurrentList, currentList}) {
                             </div>
                         </li>)
                     ))}
-                    
-                   
-                  
-                    
-
-                    
 		        </ul>
 
             </section>
